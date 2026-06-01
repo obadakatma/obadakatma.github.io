@@ -455,8 +455,16 @@
     /* ── PROJECTS ── */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem
+    }
+
+    @media (max-width: 768px) {
+
+      /* your existing rules... */
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .project-card {
@@ -979,8 +987,7 @@
         </div>
       </div><!-- end hero-content -->
       <img src="https://drive.google.com/thumbnail?id=1TxM3XXHeKttvbcV_e53c1jAtixgkZSly&sz=w800" alt="Obada Katma"
-        class="hero-photo"
-        style="object-fit: cover; object-position: center top; transform: scale(1.2);"  />
+        class="hero-photo" style="object-fit: cover; object-position: center top; transform: scale(1.2);" />
     </div><!-- end hero-inner -->
     <!-- STATS -->
     <div class="stats">
@@ -1099,11 +1106,9 @@
                   Link → Embed</div>
               </div> -->
 
-              <iframe
-            src="https://a360.co/4vnnGk7"
-            allowfullscreen webkitallowfullscreen mozallowfullscreen
-            frameborder="0">
-          </iframe>
+              <iframe src="https://a360.co/4vnnGk7" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                frameborder="0">
+              </iframe>
 
             </div>
 
