@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obada Katma — Robotics Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a28;
+      --border: #ffffff14;
+      --text: #f0ede8;
+      --muted: #8887a0;
+      --accent: #7c6ff7;
+      --cyan: #3ecfcf;
+      --amber: #f5a623;
+      --green: #4ade80;
+      --red: #f87171;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      overflow-x: hidden
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .12em
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s
+    }
+
+    .nav-links a:hover {
+      color: var(--text)
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .5
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124, 111, 247, .15) 0%, transparent 70%);
+      pointer-events: none
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 900px
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--accent)
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 3rem;
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 60px rgba(124, 111, 247, .3);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner {
+        flex-direction: column-reverse;
+      }
+
+      .hero-photo {
+        width: 160px;
+        height: 160px;
+      }
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -.03em;
+      margin-bottom: 1rem
+    }
+
+    h1 span {
+      color: var(--accent)
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 2.5rem
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 3rem
+    }
+
+    .badge {
+      padding: .3rem .9rem;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: .05em;
+      border: 1px solid
+    }
+
+    .badge.blue {
+      color: var(--cyan);
+      border-color: rgba(62, 207, 207, .3);
+      background: rgba(62, 207, 207, .06)
+    }
+
+    .badge.purple {
+      color: var(--accent);
+      border-color: rgba(124, 111, 247, .3);
+      background: rgba(124, 111, 247, .06)
+    }
+
+    .badge.amber {
+      color: var(--amber);
+      border-color: rgba(245, 166, 35, .3);
+      background: rgba(245, 166, 35, .06)
+    }
+
+    .badge.green {
+      color: var(--green);
+      border-color: rgba(74, 222, 128, .3);
+      background: rgba(74, 222, 128, .06)
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      padding: .75rem 1.75rem;
+      border-radius: 6px;
+      font-size: .85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s;
+      cursor: pointer;
+      border: none;
+      display: inline-block
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      background: #9085f9;
+      transform: translateY(-2px)
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border)
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 5rem 2.5rem;
+      overflow: hidden
+    }
+
+    .stat {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
+      text-align: center
+    }
+
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      color: var(--text)
+    }
+
+    .stat-num span {
+      color: var(--accent)
+    }
+
+    .stat-label {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .4rem;
+      letter-spacing: .06em;
+      text-transform: uppercase
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2.5rem
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent)
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 3rem
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap
+    }
+
+    .edu-icon {
+      font-size: 2rem;
+      min-width: 2.5rem
+    }
+
+    .edu-degree {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .3rem
+    }
+
+    .edu-school {
+      font-size: .85rem;
+      color: var(--cyan);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: .4rem
+    }
+
+    .edu-date {
+      font-size: .75rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: .75rem
+    }
+
+    .edu-courses {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem
+    }
+
+    .exp-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      transition: border-color .2s
+    }
+
+    .exp-item:hover {
+      border-color: rgba(124, 111, 247, .3)
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: .6rem
+    }
+
+    .exp-role {
+      font-size: .95rem;
+      font-weight: 700
+    }
+
+    .exp-date {
+      font-size: .72rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      white-space: nowrap
+    }
+
+    .exp-org {
+      font-size: .8rem;
+      color: var(--accent);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: .75rem
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem
+    }
+
+    .exp-bullets li {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      display: flex;
+      gap: .6rem
+    }
+
+    .exp-bullets li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: .05rem
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all .3s;
+      position: relative
+    }
+
+    .project-card:hover {
+      border-color: rgba(124, 111, 247, .4);
+      transform: translateY(-4px)
+    }
+
+    .card-accent-bar {
+      height: 3px;
+      width: 100%
+    }
+
+    .purple-bar {
+      background: linear-gradient(90deg, var(--accent), #a78bfa)
+    }
+
+    .cyan-bar {
+      background: linear-gradient(90deg, var(--cyan), #67e8f9)
+    }
+
+    .amber-bar {
+      background: linear-gradient(90deg, var(--amber), #fcd34d)
+    }
+
+    .green-bar {
+      background: linear-gradient(90deg, var(--green), #86efac)
+    }
+
+    .red-bar {
+      background: linear-gradient(90deg, var(--red), #fca5a5)
+    }
+
+    .pink-bar {
+      background: linear-gradient(90deg, #e879f9, #c084fc)
+    }
+
+    .indigo-bar {
+      background: linear-gradient(90deg, #818cf8, #6366f1)
+    }
+
+    .teal-bar {
+      background: linear-gradient(90deg, #2dd4bf, #06b6d4)
+    }
+
+    .card-body {
+      padding: 1.5rem
+    }
+
+    .card-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .75rem
+    }
+
+    .t-purple {
+      color: var(--accent)
+    }
+
+    .t-cyan {
+      color: var(--cyan)
+    }
+
+    .t-amber {
+      color: var(--amber)
+    }
+
+    .t-green {
+      color: var(--green)
+    }
+
+    .t-red {
+      color: var(--red)
+    }
+
+    .t-pink {
+      color: #e879f9
+    }
+
+    .t-indigo {
+      color: #818cf8
+    }
+
+    .t-teal {
+      color: #2dd4bf
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: .6rem;
+      line-height: 1.3
+    }
+
+    .card-desc {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-top: .5rem
+    }
+
+    .card-award {
+      font-size: .7rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--amber)
+    }
+
+    .card-award::before {
+      content: '★ '
+    }
+
+    .card-links {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap
+    }
+
+    .card-link {
+      font-size: .72rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: .3rem .7rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all .2s;
+      font-family: 'Space Mono', monospace
+    }
+
+    .card-link:hover {
+      color: var(--text);
+      border-color: var(--accent)
+    }
+
+    .card-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: 1rem
+    }
+
+    .tag {
+      font-size: .65rem;
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border)
+    }
+
+    /* ── FUSION 360 VIEWER ── */
+    .fusion-viewer {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+      position: relative;
+      background: var(--surface2)
+    }
+
+    .fusion-viewer iframe {
+      width: 100%;
+      height: 340px;
+      border: none;
+      display: block
+    }
+
+    .fusion-placeholder {
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      color: var(--muted)
+    }
+
+    .fusion-placeholder-icon {
+      font-size: 2.5rem;
+      opacity: .5
+    }
+
+    .fusion-placeholder-text {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-align: center;
+      line-height: 1.6
+    }
+
+    .fusion-placeholder-hint {
+      font-size: .65rem;
+      color: rgba(124, 111, 247, .6);
+      font-family: 'Space Mono', monospace;
+      text-align: center;
+      padding: .5rem 1rem;
+      border: 1px dashed rgba(124, 111, 247, .25);
+      border-radius: 6px;
+      margin-top: .25rem
+    }
+
+    .fusion-label {
+      font-size: .65rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--muted);
+      padding: .4rem .75rem;
+      background: rgba(124, 111, 247, .08);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .fusion-label::before {
+      content: '⬡';
+      color: var(--accent);
+      font-size: .7rem
+    }
+
+    /* ── VIDEO WRAPPER ── */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border)
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem
+    }
+
+    .skill-group-title {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+      margin-bottom: .9rem;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem
+    }
+
+    .skill-item {
+      font-size: .8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .skill-item::before {
+      content: '—';
+      color: var(--border)
+    }
+
+    /* ── AWARDS ── */
+    .awards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem
+    }
+
+    .award-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: border-color .2s
+    }
+
+    .award-item:hover {
+      border-color: rgba(245, 166, 35, .3)
+    }
+
+    .award-icon {
+      font-size: 1.8rem;
+      min-width: 2.5rem;
+      text-align: center
+    }
+
+    .award-title {
+      font-weight: 600;
+      font-size: .9rem;
+      margin-bottom: .2rem
+    }
+
+    .award-sub {
+      font-size: .78rem;
+      color: var(--muted)
+    }
+
+    /* ── VOLUNTEERING ── */
+    .vol-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start
+    }
+
+    .vol-icon {
+      font-size: 1.6rem;
+      min-width: 2rem;
+      text-align: center
+    }
+
+    .vol-title {
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: .25rem
+    }
+
+    .vol-org {
+      font-size: .78rem;
+      color: var(--green);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: .5rem
+    }
+
+    .vol-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem
+    }
+
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .contact-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: all .2s;
+      display: block
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px)
+    }
+
+    .contact-icon {
+      font-size: 1.4rem;
+      margin-bottom: .5rem
+    }
+
+    .contact-label {
+      font-size: .72rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: .08em
+    }
+
+    .contact-val {
+      font-size: .85rem;
+      font-weight: 600;
+      margin-top: .2rem
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .75rem;
+      font-family: 'Space Mono', monospace;
+      border-top: 1px solid var(--border)
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .hero-content>* {
+      animation: fadeUp .6s both
+    }
+
+    .hero-tag {
+      animation-delay: .1s
+    }
+
+    h1 {
+      animation-delay: .2s
+    }
+
+    .hero-sub {
+      animation-delay: .3s
+    }
+
+    .hero-badges {
+      animation-delay: .4s
+    }
+
+    .hero-cta {
+      animation-delay: .5s
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-logo">OK.dev</div>
+    <div class="nav-links">
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════ HERO -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">Robotics + Computer Vision Engineer</div>
+        <h1>Obada<br><span>Katma</span></h1>
+        <p class="hero-sub">Building robots that sense, think, and move. B.Sc. Computer & Automation Engineering,
+          Damascus University. Competition-proven experience spanning the full robotics stack — from mechanical design
+          and
+          embedded firmware to real-time vision pipelines and control theory.</p>
+        <div class="hero-badges">
+          <span class="badge blue">ROS2 Humble</span>
+          <span class="badge purple">OpenCV</span>
+          <span class="badge amber">MATLAB/Simulink</span>
+          <span class="badge green">Intel RealSense D455</span>
+          <span class="badge blue">Fusion 360</span>
+          <span class="badge purple">STM32 / Arduino</span>
+          <span class="badge amber">Fuzzy Logic Control</span>
+          <span class="badge green">3D Printing (FDM)</span>
+          <span class="badge blue">Python · C · C++</span>
+          <span class="badge purple">MediaPipe</span>
+        </div>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div><!-- end hero-content -->
+      <img src="https://drive.google.com/thumbnail?id=1TxM3XXHeKttvbcV_e53c1jAtixgkZSly&sz=w800" alt="Obada Katma"
+        class="hero-photo"
+        style="object-fit: cover; object-position: center top; transform: scale(1.2);"  />
+    </div><!-- end hero-inner -->
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">6<span>+</span></div>
+        <div class="stat-label">Robots Built</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100<span>+</span></div>
+        <div class="stat-label">Freelance Clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3<span>rd</span></div>
+        <div class="stat-label">Place in Amman Robotic Competition</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2<span>y</span></div>
+        <div class="stat-label">Robotic Mentorship Experience</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ EDUCATION -->
+    <section id="education">
+      <div class="section-label">Academic Background</div>
+      <h2>Education</h2>
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">B.Sc. Computer and Automation Engineering</div>
+          <div class="edu-school">Damascus University · Damascus, Syria</div>
+          <div class="edu-date">Oct 2021 – 2026</div>
+          <div class="edu-courses">Specialization in robotics, control systems, and embedded electronics<br>
+            Relevant coursework: Control Theory · Digital Systems · Microprocessors · Signal Processing · Linear Algebra
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ EXPERIENCE -->
+    <section id="experience">
+      <div class="section-label">Professional Background</div>
+      <h2>Experience</h2>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Technical Team Mentor — First Global Challenge 2025</div>
+            <div class="exp-date">2025</div>
+          </div>
+          <div class="exp-org">First Global International Robotics Competition · Panama City, Panama</div>
+          <ul class="exp-bullets">
+            <li>Led the technical mentorship of the national team, overseeing mechanical design and robot functionality
+            </li>
+            <li>Defined the team's game strategy and field interaction plan for the international competition</li>
+            <li>Coordinated between mechanical, electrical, and software sub-teams to integrate the full robot system
+            </li>
+            <li>Earned an official certification from First Global for participation and technical leadership</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Robotics Mentor</div>
+            <div class="exp-date">2025 – 2026</div>
+          </div>
+          <div class="exp-org">ITE Robotics Club · ITE Damascus University</div>
+          <ul class="exp-bullets">
+            <li>Mentored two student teams: a Mouse Maze robot team and a Robotic Arm team</li>
+            <li>Guided mechanical design decisions, control strategy, and firmware implementation</li>
+            <li>Coached students through competition preparation and technical problem solving</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Freelance 3D Designer & Printing Specialist</div>
+            <div class="exp-date">Nov 2023 – Present</div>
+          </div>
+          <div class="exp-org">Independent / Direct Clients · Remote</div>
+          <ul class="exp-bullets">
+            <li>Delivered 3D design and printing services to 100+ clients across product design, mechanical engineering
+              parts, and robotics prototypes</li>
+            <li>Specialized in designing robotic components and assemblies for university students and research teams
+            </li>
+            <li>Managed end-to-end workflow: client brief → CAD modeling (Fusion 360) → slicing → FDM printing →
+              post-processing → delivery</li>
+            <li>Reverse-engineered and rebuilt a faulty 3D printer control board on perfboard, restoring full machine
+              functionality</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ PROJECTS -->
+    <section id="projects">
+      <div class="section-label">Selected Work</div>
+      <h2>Projects</h2>
+      <div class="projects-grid">
+
+        <!-- 1 · TABLE TENNIS LAUNCHER -->
+        <div class="project-card">
+          <div class="card-accent-bar cyan-bar"></div>
+          <div class="card-body">
+            <div class="fusion-label">Autodesk Fusion 360 — 3D Model</div>
+            <div class="fusion-viewer">
+              <!-- ▼ PASTE YOUR FUSION 360 SHARE LINK HERE ▼
+               In Fusion 360: File → Share → Get Link → Copy Embed Code
+               The embed src looks like: https://a360.autodesk.com/shares/public/SHARE_ID/foamui
+               Replace the src below with your actual embed URL. -->
+              <!-- <div class="fusion-placeholder">
+                <div class="fusion-placeholder-icon">⬡</div>
+                <div class="fusion-placeholder-text">Stewart Platform 6-DOF<br>3D Model Viewer</div>
+                <div class="fusion-placeholder-hint">Paste your Fusion 360 embed URL here.<br>File → Share → Get
+                  Shareable
+                  Link → Embed</div>
+              </div> -->
+
+              <iframe
+            src="https://a360.co/4vnnGk7"
+            allowfullscreen webkitallowfullscreen mozallowfullscreen
+            frameborder="0">
+          </iframe>
+
+            </div>
+
+
+
+            <div class="card-tag t-cyan">Computer Vision · Robotics · ROS2</div>
+            <div class="card-title">Table Tennis Ball Launcher Robot</div>
+            <div class="card-desc">Autonomous robot replicating real training scenarios. Tracks ball trajectory and
+              bounce
+              events in real-time using Intel RealSense D455 depth camera. Full ROS2 Humble simulation environment
+              validated before hardware deployment.</div>
+            <div class="card-stack"><span class="tag">Intel RealSense D455</span><span class="tag">ROS2
+                Humble</span><span class="tag">OpenCV</span><span class="tag">Python</span><span
+                class="tag">Gazebo</span>
+            </div>
+            <div class="card-footer">
+              <div class="card-award">3rd Place in Amman Arab University Robotics and AI Competition</div>
+              <div class="card-links"><a href="https://www.youtube.com/watch?v=qS5auFV10LQ" class="card-link">Video
+                  ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 · STEWART PLATFORM — with Fusion 360 viewer -->
+        <div class="project-card">
+          <div class="card-accent-bar purple-bar"></div>
+          <div class="card-body">
+            <div class="fusion-label">Autodesk Fusion 360 — 3D Model</div>
+            <div class="fusion-viewer">
+              <!-- ▼ PASTE YOUR FUSION 360 SHARE LINK HERE ▼
+               In Fusion 360: File → Share → Get Link → Copy Embed Code
+               The embed src looks like: https://a360.autodesk.com/shares/public/SHARE_ID/foamui
+               Replace the src below with your actual embed URL. -->
+              <!-- <div class="fusion-placeholder">
+            <div class="fusion-placeholder-icon">⬡</div>
+            <div class="fusion-placeholder-text">Stewart Platform 6-DOF<br>3D Model Viewer</div>
+            <div class="fusion-placeholder-hint">Paste your Fusion 360 embed URL here.<br>File → Share → Get Shareable Link → Embed</div>
+          </div> -->
+
+              <iframe src="https://a360.co/3RuEKWN" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                frameborder="0">
+              </iframe>
+
+            </div>
+            <div class="card-tag t-purple">Control Theory · Simulation · 2025</div>
+            <div class="card-title">Stewart Platform Stabilizer (6-DOF Parallel Manipulator)</div>
+            <div class="card-desc">6-DOF parallel manipulator using MPU6050 IMU for pan/tilt measurement. Fuzzy Logic
+              Controller for real-time stabilization. Full MATLAB/Simulink physical model with inverse kinematics
+              equations and hardware-in-the-loop via Arduino serial.</div>
+            <div class="card-stack"><span class="tag">MATLAB/Simulink</span><span class="tag">Fuzzy Logic</span><span
+                class="tag">Arduino</span><span class="tag">MPU6050</span><span class="tag">6-DOF Kinematics</span><span
+                class="tag">Fusion 360</span></div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-links"><a
+                  href="https://youtube.com/playlist?list=PL_ipu75igbXuJsvamzeyGvmSYwWZ53CFs&si=O7ROCSyKX47hAocH"
+                  class="card-link">Video ↗</a></div>
+            </div>
+          </div>
+        </div>
+        <!-- Pyraminx Cube Solver -->
+        <div class="project-card">
+          <div class="card-accent-bar" style="background:linear-gradient(90deg,#5be766,#6bed26)"></div>
+          <div class="card-body">
+            <a href="https://www.youtube.com/watch?v=VmXtqXqta_c" target="_blank"
+              style="display:block;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;background:var(--surface2);border:1px solid var(--border);text-decoration:none;">
+              <img src="https://img.youtube.com/vi/VmXtqXqta_c/hqdefault.jpg" alt="Pyraminx Cube Solver"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .2s">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                <div
+                  style="width:56px;height:56px;background:rgba(238, 69, 69, 0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div
+                    style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #fff;margin-left:4px">
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div class="card-tag" style="color:#5be766">Computer Vision · Automation</div>
+            <div class="card-title">Pyraminx Cube Solver</div>
+            <div class="card-desc">Automated solver for the Pyraminx twisty puzzle. Computer vision detects each face's
+              colors and orientation, then drives the solution sequence step by step.</div>
+            <div class="card-stack">
+              <span class="tag">OpenCV</span>
+              <span class="tag">Python</span>
+              <span class="tag">Color Detection</span>
+              <span class="tag">Graph Algorithms</span>
+            </div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-links">
+                <a href="https://www.youtube.com/watch?v=VmXtqXqta_c" class="card-link">Video ↗</a>
+                <a href="https://github.com/obadakatma/Pyraminx-Cube-Solver" class="card-link">GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 · 4-DOF ROBOTIC ARM — with Fusion 360 viewer -->
+        <div class="project-card">
+          <div class="card-accent-bar amber-bar"></div>
+          <div class="card-body">
+            <div class="fusion-label">Autodesk Fusion 360 — 3D Model</div>
+            <div class="fusion-viewer">
+              <!-- ▼ PASTE YOUR FUSION 360 SHARE LINK HERE ▼ -->
+              <!-- <div class="fusion-placeholder">
+            <div class="fusion-placeholder-icon">⬡</div>
+            <div class="fusion-placeholder-text">4-DOF Robotic Arm<br>3D Model Viewer</div>
+            <div class="fusion-placeholder-hint">Paste your Fusion 360 embed URL here.<br>File → Share → Get Shareable Link → Embed</div>
+          </div> -->
+
+              <iframe src="https://a360.co/4vgRmz7" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                frameborder="0">
+              </iframe>
+
+            </div>
+            <div class="card-tag t-amber">Robotics · Kinematics · Simulation · 2024</div>
+            <div class="card-title">4-DOF Robotic Arm with MATLAB/Simulink Simulation</div>
+            <div class="card-desc">MG995 servo-driven arm with complete forward and inverse kinematics derived and
+              validated in MATLAB/Simulink with servo transfer function models. SolidWorks CAD exported directly into
+              Simulink for physics-accurate simulation.</div>
+            <div class="card-stack"><span class="tag">SolidWorks</span><span class="tag">MATLAB/Simulink</span><span
+                class="tag">MG995 Servos</span><span class="tag">Inverse Kinematics</span><span class="tag">Fusion
+                360</span></div>
+            <div class="card-footer">
+              <div></div>
+              <!-- <div class="card-links"><a href="YOUR_VIDEO_LINK" class="card-link">Video ↗</a></div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 · FACE-TRACKING ROBOT — with Fusion 360 viewer -->
+        <div class="project-card">
+          <div class="card-accent-bar green-bar"></div>
+          <div class="card-body">
+            <div class="fusion-label">Autodesk Fusion 360 — 3D Model</div>
+            <div class="fusion-viewer">
+              <!-- ▼ PASTE YOUR FUSION 360 SHARE LINK HERE ▼ -->
+              <!-- <div class="fusion-placeholder">
+            <div class="fusion-placeholder-icon">⬡</div>
+            <div class="fusion-placeholder-text">Face-Tracking Robot<br>3D Model Viewer</div>
+            <div class="fusion-placeholder-hint">Paste your Fusion 360 embed URL here.<br>File → Share → Get Shareable Link → Embed</div>
+          </div> -->
+
+              <iframe src="https://a360.co/434v3AU" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                frameborder="0">
+              </iframe>
+
+            </div>
+            <div class="card-tag t-green">Computer Vision · Embedded · 2023</div>
+            <div class="card-title">Face-Tracking Robot with PID Controller</div>
+            <div class="card-desc">Raspberry Pi robot with Pi Camera Module. Real-time face detection via OpenCV with a
+              PID control loop for smooth, responsive tracking motion.</div>
+            <div class="card-stack"><span class="tag">Raspberry Pi</span><span class="tag">OpenCV</span><span
+                class="tag">PID Control</span><span class="tag">Python</span><span class="tag">Pi Camera</span></div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-links"><a href="https://www.youtube.com/watch?v=G77ZGqbe8_Y" class="card-link">Video
+                  ↗</a><a href="https://github.com/obadakatma/Face-Tracking-with-PID-controller"
+                  class="card-link">GitHub
+                  ↗</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Digital Roller Measuring Meter -->
+        <div class="project-card">
+          <div class="card-accent-bar" style="background:linear-gradient(90deg,#f5a623,#fcd34d)"></div>
+          <div class="card-body">
+            <a href="https://www.youtube.com/watch?v=Y3WobXmJYEQ" target="_blank"
+              style="display:block;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;background:var(--surface2);border:1px solid var(--border);text-decoration:none;">
+              <img src="https://img.youtube.com/vi/Y3WobXmJYEQ/hqdefault.jpg" alt="Digital Roller Measuring Meter"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .2s">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                <div
+                  style="width:56px;height:56px;background:rgba(238,69,69,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div
+                    style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #fff;margin-left:4px">
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div class="card-tag" style="color:#f5a623">Embedded · Sensors · Electronics</div>
+            <div class="card-title">Digital Roller Measuring Meter</div>
+            <div class="card-desc">Handheld distance measurement device using a rolling wheel and rotary encoder. An
+              Arduino reads encoder pulses, calculates distance in real time, and displays the result on an LCD screen.
+            </div>
+            <div class="card-stack">
+              <span class="tag">Arduino</span>
+              <span class="tag">Rotary Encoder</span>
+              <span class="tag">LCD Display</span>
+              <span class="tag">C++</span>
+            </div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-links">
+                <a href="https://www.youtube.com/watch?v=Y3WobXmJYEQ" class="card-link">Video ↗</a>
+                <a href="https://github.com/obadakatma/Digital_Roller_Measuring_Meter_Project" class="card-link">GitHub
+                  ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 · BALL PID BALANCE -->
+        <div class="project-card">
+          <div class="card-accent-bar red-bar"></div>
+          <div class="card-body">
+            <a href="https://www.youtube.com/watch?v=zgfN_sRKRF4" target="_blank"
+              style="display:block;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;background:var(--surface2);border:1px solid var(--border);text-decoration:none;">
+              <img src="https://img.youtube.com/vi/zgfN_sRKRF4/hqdefault.jpg" alt="Digital Roller Measuring Meter"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .2s">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                <div
+                  style="width:56px;height:56px;background:rgba(238,69,69,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div
+                    style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #fff;margin-left:4px">
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div class="card-tag t-red">Control · Computer Vision · Mar–Apr 2023</div>
+            <div class="card-title">Ball PID Balance Robot</div>
+            <div class="card-desc">Led construction of a robot that balances a ball on a 2D surface using PID control
+              and
+              computer vision. Implemented PID algorithm in Arduino firmware; supervised OpenCV-based image processing
+              pipeline for real-time position feedback.</div>
+            <div class="card-stack"><span class="tag">Arduino</span><span class="tag">OpenCV</span><span
+                class="tag">PID</span><span class="tag">C++</span></div>
+            <div class="card-footer">
+              <div class="card-links"><a href="https://www.youtube.com/watch?v=zgfN_sRKRF4" class="card-link">Video
+                  ↗</a><a href="https://github.com/obadakatma/Ball_Pid_Project.git" class="card-link">GitHub ↗</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 · RUBIK'S CUBE SOLVER -->
+        <div class="project-card">
+          <div class="card-accent-bar pink-bar"></div>
+          <div class="card-body">
+            <a href="https://www.youtube.com/watch?v=Z1MXeXLEMHE" target="_blank"
+              style="display:block;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;background:var(--surface2);border:1px solid var(--border);text-decoration:none;">
+              <img src="https://drive.google.com/thumbnail?id=1E7oidZyuu26GtwPymjiDkmZYphbHIpK6&sz=w1000"
+                alt="Digital Roller Measuring Meter"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .2s">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                <div
+                  style="width:56px;height:56px;background:rgba(238,69,69,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div
+                    style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #fff;margin-left:4px">
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div class="card-tag t-pink">Computer Vision · Automation · 2022</div>
+            <div class="card-title">Rubik's Cube Solver</div>
+            <div class="card-desc">Automated solver combining computer vision (color/face detection) with Lego
+              Mindstorms
+              EV3 actuators. Detects cube state and executes the solution sequence mechanically.</div>
+            <div class="card-stack"><span class="tag">Lego EV3</span><span class="tag">OpenCV</span><span
+                class="tag">Python</span><span class="tag">Color Detection</span></div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-award">FMEE Bronze Medal</div>
+              <div class="card-links"><a href="https://www.youtube.com/watch?v=Z1MXeXLEMHE" class="card-link">Video
+                  ↗</a><a href="https://github.com/obadakatma/rubik-s-cube" class="card-link">GitHub ↗</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 · VIRTUAL WHITEBOARD -->
+        <div class="project-card">
+          <div class="card-accent-bar indigo-bar"></div>
+          <div class="card-body">
+            <a href="https://www.youtube.com/watch?v=M0LhYpInscU" target="_blank"
+              style="display:block;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;background:var(--surface2);border:1px solid var(--border);text-decoration:none;">
+              <img src="https://img.youtube.com/vi/M0LhYpInscU/hqdefault.jpg" alt="Digital Roller Measuring Meter"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .2s">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                <div
+                  style="width:56px;height:56px;background:rgba(238,69,69,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div
+                    style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #fff;margin-left:4px">
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div class="card-tag t-indigo">Computer Vision · HCI · Sep 2022</div>
+            <div class="card-title">Virtual Whiteboard</div>
+            <div class="card-desc">Virtual whiteboard application for online teaching and remote collaboration.
+              Real-time
+              hand tracking and gesture recognition via OpenCV and MediaPipe — no physical input device required.</div>
+            <div class="card-stack"><span class="tag">OpenCV</span><span class="tag">MediaPipe</span><span
+                class="tag">Python</span><span class="tag">Hand Tracking</span></div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-links"><a href="https://www.youtube.com/watch?v=M0LhYpInscU" class="card-link">Video
+                  ↗</a><a href="https://github.com/obadakatma/Virtual-Board" class="card-link">GitHub ↗</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 · TELEGRAM BOTS -->
+        <div class="project-card">
+          <div class="card-accent-bar teal-bar"></div>
+          <div class="card-body">
+            <div class="card-tag t-teal">Automation · API Integration · 2022–2023</div>
+            <div class="card-title">Telegram Bots — Movie Info & Grade Tracker</div>
+            <div class="card-desc">Two production bots: <strong style="color:var(--text)">Popcorn Slayer</strong> —
+              real-time movie and series info via third-party API integration. <strong style="color:var(--text)">College
+                Grades Bot</strong> — grade storage and management system for students across their full academic
+              career.
+            </div>
+            <div class="card-stack"><span class="tag">Python</span><span class="tag">Telegram Bot API</span><span
+                class="tag">Third-Party APIs</span><span class="tag">SQL</span></div>
+            <div class="card-footer">
+              <div></div>
+              <div class="card-links"><a href="https://github.com/obadakatma/College-Grades-Bot"
+                  class="card-link">College-Grades-Bott GitHub ↗</a><a
+                  href="https://github.com/obadakatma/Popcorn_slayer_bot" class="card-link">Popcorn_slayer_bot GitHub
+                  ↗</a></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ SKILLS -->
+    <section id="skills">
+      <div class="section-label">What I Work With</div>
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title t-cyan">Robotics & Control</div>
+          <div class="skill-list">
+            <div class="skill-item">PID / Fuzzy Logic Control</div>
+            <div class="skill-item">Forward & Inverse Kinematics</div>
+            <div class="skill-item">ROS2 Humble / Gazebo / RViz2</div>
+            <div class="skill-item">URDF Modeling</div>
+            <div class="skill-item">Stewart Platform (6-DOF)</div>
+            <div class="skill-item">4-DOF Robotic Arm</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-purple">Embedded Systems</div>
+          <div class="skill-list">
+            <div class="skill-item">Arduino (AVR, ATtiny13, ESP-01)</div>
+            <div class="skill-item">STM32 Microcontrollers</div>
+            <div class="skill-item">Raspberry Pi</div>
+            <div class="skill-item">Lego Mindstorms EV3</div>
+            <div class="skill-item">Perfboard Assembly & Soldering</div>
+            <div class="skill-item">PCB Design · Serial Comms</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-amber">Simulation & CAD</div>
+          <div class="skill-list">
+            <div class="skill-item">MATLAB / Simulink (Physical Modeling)</div>
+            <div class="skill-item">Fusion 360</div>
+            <div class="skill-item">SolidWorks</div>
+            <div class="skill-item">FDM 3D Printing</div>
+            <div class="skill-item">URDF / Gazebo Export</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-green">Computer Vision & AI</div>
+          <div class="skill-list">
+            <div class="skill-item">OpenCV</div>
+            <div class="skill-item">MediaPipe</div>
+            <div class="skill-item">Intel RealSense D455</div>
+            <div class="skill-item">Object, Ball & Face Tracking</div>
+            <div class="skill-item">Depth Camera Pipelines</div>
+            <div class="skill-item">NumPy · Pandas · Scikit-learn</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-red">Programming</div>
+          <div class="skill-list">
+            <div class="skill-item">Python</div>
+            <div class="skill-item">C / C++</div>
+            <div class="skill-item">C# / Java</div>
+            <div class="skill-item">MATLAB</div>
+            <div class="skill-item">SQL</div>
+            <div class="skill-item">Bash / Linux · Competitive Prog.</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-cyan">Hardware</div>
+          <div class="skill-list">
+            <div class="skill-item">DC / Stepper / Servo Motors</div>
+            <div class="skill-item">IMU (MPU6050)</div>
+            <div class="skill-item">Ultrasonic / IR / Encoders</div>
+            <div class="skill-item">Intel RealSense D455</div>
+            <div class="skill-item">MG995 Servos</div>
+            <div class="skill-item">Circuit Reverse Engineering</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-indigo">Software & Tools</div>
+          <div class="skill-list">
+            <div class="skill-item">Git / GitHub</div>
+            <div class="skill-item">Linux CLI</div>
+            <div class="skill-item">MySQL</div>
+            <div class="skill-item">Google Colab / Anaconda</div>
+            <div class="skill-item">Telegram Bot API</div>
+            <div class="skill-item">Third-Party API Integration</div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title t-teal">Languages</div>
+          <div class="skill-list">
+            <div class="skill-item">Arabic — Native</div>
+            <div class="skill-item">English — B2 (Reading / Writing)</div>
+            <div class="skill-item">English — B1 (Speaking)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ AWARDS -->
+    <section id="awards">
+      <div class="section-label">Recognition</div>
+      <h2>Awards & Certifications</h2>
+      <div class="awards-list">
+        <div class="award-item">
+          <div class="award-icon">🥉</div>
+          <div class="award-text">
+            <div class="award-title">3rd Place — Full Robotics Track</div>
+            <div class="award-sub">Amman Arab University Robotics &amp; AI Competition · 30 teams · 10 Arab countries ·
+              May 2026</div>
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">🌍</div>
+          <div class="award-text">
+            <div class="award-title">First Global Challenge 2025 — Official Participation Certification</div>
+            <div class="award-sub">First Global International Robotics Competition · Panama City, Panama · Technical
+              Team
+              Mentor</div>
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">🥉</div>
+          <div class="award-text">
+            <div class="award-title">Bronze Medal — FMEE Project Exhibition</div>
+            <div class="award-sub">Damascus University · Faculty of Mechanical &amp; Electrical Engineering · Oct 2022 ·
+              Ranked 4th in the Computer Engineering &amp; Automation department</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ VOLUNTEERING -->
+    <section id="volunteering">
+      <div class="section-label">Community</div>
+      <h2>Volunteering</h2>
+      <div class="vol-card">
+        <div class="vol-icon">🤝</div>
+        <div>
+          <div class="vol-title">Technical Volunteer</div>
+          <div class="vol-org">Tomouh Team · Damascus, Syria · Sep 2022 – Present</div>
+          <div class="vol-desc">Built and showcased a technical project at the FMEE Exhibition alongside the Tomouh
+            student team. Achieved 4th place in the Computer Engineering and Automation department category.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ CONTACT -->
+    <section id="contact">
+      <div class="section-label">Let's Build Together</div>
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <a href="mailto:obadaktm@gmail.com" class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">obadaktm@gmail.com</div>
+        </a>
+        <a href="https://www.linkedin.com/in/obada-katma-437409237/" target="_blank" class="contact-item">
+          <div class="contact-icon">💼</div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-val">obada-katma</div>
+        </a>
+        <a href="https://github.com/obadakatma" target="_blank" class="contact-item">
+          <div class="contact-icon">🐙</div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-val">obadakatma</div>
+        </a>
+      </div>
+    </section>
+
+    <footer>Built by Obada Katma · Damascus, Syria · 2026</footer>
+
+</body>
+
+</html>
